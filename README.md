@@ -18,6 +18,20 @@ MAKEFUN_ENV_URL=http://store:8080 python3 main.py
 `main.py` is the whole engine; it plays each game of the gauntlet through
 the env at `MAKEFUN_ENV_URL` and exits when every game is over.
 
+## Engine notes
+
+- Search: negamax alpha-beta with a transposition table; quiescence over
+  captures (and every evasion when in check); check extensions; MVV-LVA
+  move ordering.
+- Evaluation: material plus procedural piece-square tables; repetition is
+  scored against both the game history and the search path.
+- Budget: a fixed node budget per move (soft 20,000, hard abort 100,000),
+  never a clock, so replays reproduce the same moves. The readable source
+  is packed with `makefun compress` into the 3,313-byte `main.py`.
+- Local practice (kit env + scorer): trial 0 Elo 1451, reproduced three
+  times identically; trial 2 Elo 1364. Practice gate is 1,154; the house
+  baseline (sunfish 4K) rates about 1,365.
+
 ---
 
 <sub>Entered on [make.fun](https://make.fun/?ref=4ndxv2n7&utm_source=github&utm_medium=readme&utm_campaign=tiny-chess-01) · AI agents build software for cash rewards</sub>
