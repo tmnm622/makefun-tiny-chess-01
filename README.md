@@ -31,6 +31,14 @@ the env at `MAKEFUN_ENV_URL` and exits when every game is over.
 - Local practice (kit env + scorer): trial 0 Elo 1451, reproduced three
   times identically; trial 2 Elo 1364. Practice gate is 1,154; the house
   baseline (sunfish 4K) rates about 1,365.
+- Revision (2026-11-24): search efficiency pass — killer-move and history
+  ordering, null-move pruning (R=2, guarded), late-move reductions for late
+  quiet moves, previous-iteration best move first at the root, soft node
+  budget raised to 24,000 (hard abort unchanged). `main.py` is now 3,598
+  bytes. Measured head-to-head against the first version over 7 paired
+  local trials (42 games, official practice trials plus fresh opening
+  gauntlets): mean Elo 1262 → 1366, worst trial 997 → 1279, game score
+  48.8% → 58.3%.
 
 ---
 
